@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artisana | Handmade Goods Marketplace</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #F0E9E0;
+            --accent: #6A4E3B;
+            --accent-light: #9C7C5D;
+            --text: #3A3A3A;
+            --text-light: #767676;
+            --white: #FFFFFF;
+            --shadow: rgba(106, 78, 59, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 20px 0;
+            background: rgba(240, 233, 224, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 12px 0;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-btns {
+            display: flex;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-login {
+            color: var(--accent);
+            margin-right: 15px;
+            background: transparent;
+            border: none;
+        }
+
+        .btn-signup {
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+
+        .btn-signup:hover {
+            background-color: var(--accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px var(--shadow);
+        }
+
+        .btn-mobile {
+            display: none;
+            font-size: 24px;
+            color: var(--accent);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--accent);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: var(--text-light);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.3s;
+        }
+
+        .hero-cta {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .hero-cta .btn {
+            padding: 14px 30px;
+            font-size: 1.1rem;
+        }
+
+        .hero-cta .btn-primary {
+            background: var(--accent);
+            color: var(--white);
+            margin-right: 15px;
+            box-shadow: 0 10px 20px var(--shadow);
+        }
+
+        .hero-cta .btn-primary:hover {
+            background: var(--accent-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px var(--shadow);
+        }
+
+        .hero-cta .btn-secondary {
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .hero-cta .btn-secondary:hover {
+            background: rgba(106, 78, 59, 0.1);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -300px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50%;
+            opacity: 0;
+            animation: fadeIn 1.5s ease forwards 0.8s;
+        }
+
+        .hero-image img {
+            width: 40%;
+            height: 40vh;
+            z-index: 0;
+            border-radius: 30px;
+        }
+
+        .hero-blob {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 80%;
+            height: 80%;
+            background: linear-gradient(135deg, rgba(156, 124, 93, 0.2), rgba(106, 78, 59, 0.3));
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            z-index: -1;
+            animation: blobMove 15s infinite alternate;
+        }
+
+        /* About Us Section */
+        .about {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--accent);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .about-text.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .about-image {
+            flex: 1;
+            position: relative;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s ease 0.2s;
+        }
+
+        .about-image.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-image img {
+            width: 97%;
+            margin-right:50px;
+            height: 60vh;
+            border-radius: 20px;
+            border: 3px solid var(--accent); 
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 100%;
+            height: 100%;
+            /* border: 3px solid var(--accent); */
+            border-radius: 20px;
+            z-index: -1;
+        }
+
+        /* Artisans Section */
+        .artisans {
+            padding: 100px 0;
+            background-color: rgba(240, 233, 224, 0.5);
+            position: relative;
+        }
+
+        .artisans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .artisan-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .artisan-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .artisan-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .artisan-image {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .artisan-image img {
+            width: 100%;
+            height: 120%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .artisan-card:hover .artisan-image img {
+            transform: scale(1.1);
+        }
+
+        .artisan-info {
+            padding: 20px;
+        }
+
+        .artisan-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        .artisan-info p {
+            margin-bottom: 8px;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .artisan-info p i {
+            margin-right: 8px;
+            color: var(--accent);
+        }
+
+        .artisan-specialty {
+            display: inline-block;
+            padding: 5px 10px;
+            background: rgba(106, 78, 59, 0.1);
+            color: var(--accent);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        /* Categories Section */
+        .categories {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px var(--shadow);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease;
+        }
+
+        .category-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+        }
+
+        .category-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover .category-image img {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-overlay {
+            padding-bottom: 40px;
+        }
+
+        .category-overlay h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .category-overlay p {
+            font-size: 0.9rem;
+            opacity: 0;
+            height: 0;
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-overlay p {
+            opacity: 1;
+            height: auto;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: rgba(240, 233, 224, 0.5);
+            position: relative;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 20px var(--shadow);
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(106, 78, 59, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+        }
+
+        .feature-icon i {
+            font-size: 30px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .testimonials-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .testimonial-slider.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 40px;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            overflow: hidden;
+            border: 3px solid var(--accent);
+        }
+
+        .testimonial-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-light);
+            margin-bottom: 20px;
+        }
+
+        .testimonial-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 5px;
+        }
+
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(106, 78, 59, 0.3);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--accent), #5D4331);
+            color: var(--white);
+            padding-top: 70px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .footer-description {
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .footer-title {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--white);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            opacity: 0.8;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .footer-contact p {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .footer-contact i {
+            margin-right: 10px;
+        }
+
+        .footer-newsletter p {
+            margin-bottom: 20px;
+            opacity: 0.8;
+        }
+
+        .newsletter-form {
+            display: flex;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            outline: none;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .newsletter-btn {
+            padding: 0 20px;
+            background: var(--accent-light);
+            border: none;
+            border-radius: 0 30px 30px 0;
+            color: var(--white);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--white);
+            color: var(--accent);
+        }
+
+        .footer-bottom {
+            padding: 20px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes blobMove {
+            0% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+            25% {
+                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+            }
+            50% {
+                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+            }
+            75% {
+                border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+            }
+            100% {
+                border-radius: 70% 30% 46% 54% / 30% 29% 71% 70%;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero-image {
+                width: 45%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .auth-btns {
+                display: none;
+            }
+            
+            .btn-mobile {
+                display: block;
+            }
+            
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                position: relative;
+                width: 80%;
+                right: 0;
+                top: 40px;
+                transform: none;
+            }
+            
+            .about-content {
+                flex-direction: column-reverse;
+                gap: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .hero-cta .btn {
+                display: block;
+                margin: 10px auto;
+                width: 80%;
+            }
+            
+            .hero-cta .btn-primary {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-hands-holding-circle"></i>
+                    Artisana
+                </div>
+                <ul class="nav-links">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="signup.php">Shop</a></li>
+                    <li><a href="artisans.php">Artisans</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="adminlogin.php">Admin</a></li>
+                </ul>
+                <div class="auth-btns">
+                    <a href="login.php" class="btn btn-login">Login</a>
+                    <a href="signup.php" class="btn btn-signup">Sign Up</a>
+                </div>
+                <button class="btn-mobile">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Connecting You with Authentic Handmade Goods</h1>
+                <p>Discover unique handcrafted items made with passion by talented artisans from around the world. Support local craftsmanship and bring artistry into your everyday life.</p>
+                <div class="hero-cta">
+                    <a href="category.php" class="btn btn-primary">Explore Collections</a>
+                    <a href="artisans.php" class="btn btn-secondary">Meet Artisans</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="i1.png" alt="Handcrafted goods showcase">
+        </div>
+        <div class="hero-blob"></div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Us</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Our Mission & Values</h3>
+                    <p>At Artisana, we believe in the power of handmade craftsmanship and its ability to bring beauty, meaning, and sustainability into our lives. Our platform was created to bridge the gap between talented artisans and appreciative buyers who value authenticity and quality.</p>
+                    <p>We're committed to supporting local talent, promoting sustainable practices, and preserving traditional crafting techniques that might otherwise be lost in our mass-produced world. Each item listed on our marketplace tells a unique story - of heritage, creativity, and the human touch.</p>
+                </div>
+                <div class="about-image">
+                    <img src="i2.png" alt="Artisan working">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Artisans Section -->
+    <section class="artisans" id="artisans">
+        <div class="container">
+            <div class="section-title">
+                <h2>Meet Our Artisans</h2>
+            </div>
+            <div class="artisans-grid">
+                <!-- Artisan 1 -->
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="i3.png" alt="Artisan portrait">
+                    </div>
+                    <div class="artisan-info">
+                        <h3>Emily Johnson</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Portland, Oregon</p>
+                        <p><i class="fas fa-phone"></i> +1 (503) 555-2671</p>
+                        <span class="artisan-specialty">Ceramics</span>
+                    </div>
+                </div>
+                
+                <!-- Artisan 2 -->
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="i4.png" alt="Artisan portrait">
+                    </div>
+                    <div class="artisan-info">
+                        <h3>Miguel Sanchez</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Santa Fe, New Mexico</p>
+                        <p><i class="fas fa-phone"></i> +1 (505) 555-1892</p>
+                        <span class="artisan-specialty">Textiles</span>
+                    </div>
+                </div>
+                
+                <!-- Artisan 3 -->
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="i5.png" alt="Artisan portrait">
+                    </div>
+                    <div class="artisan-info">
+                        <h3>Amara Okafor</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Brooklyn, New York</p>
+                        <p><i class="fas fa-phone"></i> +1 (212) 555-4738</p>
+                        <span class="artisan-specialty">Jewelry</span>
+                    </div>
+                </div>
+                
+                <!-- Artisan 4 -->
+                <div class="artisan-card">
+                    <div class="artisan-image">
+                        <img src="i6.png" alt="Artisan portrait">
+                        <img src="/api/placeholder/400/320" alt="Artisan portrait">
+                    </div>
+                    <div class="artisan-info">
+                        <h3>Thomas Eriksen</h3>
+                        <p><i class="fas fa-map-marker-alt"></i> Seattle, Washington</p>
+                        <p><i class="fas fa-phone"></i> +1 (206) 555-7216</p>
+                        <span class="artisan-specialty">Woodworking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories" id="categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Product Categories</h2>
+            </div>
+            <div class="categories-grid">
+                <!-- Category 1 -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="jew.png" alt="Jewelry">
+                    </div>
+                    <div class="category-overlay">
+                        <h3>Jewelry</h3>
+                        <p>Handcrafted necklaces, earrings, bracelets, and rings</p>
+                    </div>
+                </div>
+                
+                <!-- Category 2 -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="hd.png" alt="Home Decor">
+                    </div>
+                    <div class="category-overlay">
+                        <h3>Home Decor</h3>
+                        <p>Beautiful objects to enhance your living space</p>
+                    </div>
+                </div>
+                
+                <!-- Category 3 -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="artisanworking.png" alt="Textiles">
+                    </div>
+                    <div class="category-overlay">
+                        <h3>Textiles</h3>
+                        <p>Handwoven fabrics, rugs, and textile art</p>
+                    </div>
+                </div>
+                
+                <!-- Category 4 -->
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="cer.png" alt="Ceramics">
+                    </div>
+                    <div class="category-overlay">
+                        <h3>Ceramics</h3>
+                        <p>Functional and decorative pottery pieces</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Choose Us</h2>
+            </div>
+            <div class="features-grid">
+                <!-- Feature 1 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Eco-Friendly</h3>
+                    <p>Supporting handmade goods means choosing sustainable, environmentally conscious products that minimize waste and ecological impact.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-hands"></i>
+                    </div>
+                    <h3>Handmade Quality</h3>
+                    <p>Each item is crafted with attention to detail and care that machine-made products simply cannot match.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <h3>Secure Payments</h3>
+                    <p>Shop with confidence knowing all transactions are protected by our advanced security systems.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Support Local Talent</h3>
+                    <p>Your purchase directly supports artisans and helps preserve traditional crafting techniques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Customer Testimonials</h2>
+            </div>
+            <div class="testimonials-container">
+                <div class="testimonial-slider">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-avatar">
+                            <img src="cut.png"Customer avatar">
+                        </div>
+                        <p class="testimonial-text">"I've been purchasing handmade jewelry from Artisana for over a year now. The quality is exceptional and knowing that I'm supporting skilled artisans makes each piece even more special."</p>
+                        <h4 class="testimonial-name">Sarah Thompson</h4>
+                        <p class="testimonial-role">Loyal Customer</p>
+                    </div>
+                    
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-avatar">
+                            <img src="cut.png"Customer avatar">
+                        </div>
+                        <p class="testimonial-text">"I've been purchasing handmade jewelry from Artisana for over a year now. The quality is exceptional and knowing that I'm supporting skilled artisans makes each piece even more special."</p>
+                        <h4 class="testimonial-name">Sarah Thompson</h4>
+                        <p class="testimonial-role">Loyal Customer</p>
+                    </div>
+                    
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-slide active">
+                        <div class="testimonial-avatar">
+                            <img src="cut.png"Customer avatar">
+                        </div>
+                        <p class="testimonial-text">"I've been purchasing handmade jewelry from Artisana for over a year now. The quality is exceptional and knowing that I'm supporting skilled artisans makes each piece even more special."</p>
+                        <h4 class="testimonial-name">Sarah Thompson</h4>
+                        <p class="testimonial-role">Loyal Customer</p>
+                    </div>
+                </div>
+                
+                <div class="testimonial-nav">
+                    <div class="testimonial-dot active" data-index="0"></div>
+                    <div class="testimonial-dot" data-index="1"></div>
+                    <div class="testimonial-dot" data-index="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Artisana</div>
+                    <p class="footer-description">Connecting artisans with appreciative buyers to celebrate handmade craftsmanship around the world.</p>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop All</a></li>
+                        <li><a href="#">Featured Artisans</a></li>
+                        <li><a href="#">New Arrivals</a></li>
+                        <li><a href="#">Bestsellers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links-container">
+                    <h3 class="footer-title">Customer Care</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Track Order</a></li>
+                        <li><a href="#">Shipping Policy</a></li>
+                        <li><a href="#">Returns & Exchanges</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h3 class="footer-title">Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Craft Street, Artville, AV 12345</p>
+                    <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+                    <p><i class="fas fa-envelope"></i> support@artisana.com</p>
+                </div>
+                
+                <div class="footer-newsletter">
+                    <h3 class="footer-title">Newsletter</h3>
+                    <p>Subscribe to our newsletter for special offers, new product announcements, and artisan stories.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your email address">
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Artisana. All rights reserved. Handcrafted with love.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Header scroll effect
+            const header = document.querySelector('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Scroll reveal animations
+            const observerOptions = {
+                threshold: 0.2,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, observerOptions);
+            
+            // Elements to observe
+            const elements = [
+                ...document.querySelectorAll('.about-text'),
+                ...document.querySelectorAll('.about-image'),
+                ...document.querySelectorAll('.artisan-card'),
+                ...document.querySelectorAll('.category-card'),
+                ...document.querySelectorAll('.feature-card'),
+                ...document.querySelectorAll('.testimonial-slider')
+            ];
+            
+            elements.forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Testimonial Slider
+            const testimonialSlider = document.querySelector('.testimonial-slider');
+            const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+            const testimonialDots = document.querySelectorAll('.testimonial-dot');
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                testimonialSlider.style.transform = `translateX(-${index * 100}%)`;
+                
+                // Update active dot
+                testimonialDots.forEach(dot => dot.classList.remove('active'));
+                testimonialDots[index].classList.add('active');
+                
+                currentSlide = index;
+            }
+            
+            // Click on dots
+            testimonialDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = parseInt(dot.getAttribute('data-index'));
+                    showSlide(slideIndex);
+                });
+            });
+            
+            // Auto slide
+            let slideInterval = setInterval(() => {
+                let nextSlide = (currentSlide + 1) % testimonialSlides.length;
+                showSlide(nextSlide);
+            }, 5000);
+            
+            // Pause on hover
+            testimonialSlider.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+            
+            // Resume on mouseleave
+            testimonialSlider.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(() => {
+                    let nextSlide = (currentSlide + 1) % testimonialSlides.length;
+                    showSlide(nextSlide);
+                }, 5000);
+            });
+            
+            // Mobile menu toggle (placeholder)
+            const mobileMenuBtn = document.querySelector('.btn-mobile');
+            mobileMenuBtn.addEventListener('click', () => {
+                // Mobile menu functionality would go here
+                alert('Mobile menu not implemented in this demo.');
+            });
+        });
+    </script>
+</body>
+</html>

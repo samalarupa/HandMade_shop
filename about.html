@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Handmade Goods Marketplace</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --primary-color: #6B4A2F; /* Warm brown */
+            --primary-dark: #4A3723;
+            --primary-light: #8B6F47; /* Lighter brown for CTA background */
+            --text-color: #4A3723; /* Darker brown for navbar text */
+            --bg-color: #F0E9E0; /* Cream/beige */
+            --card-bg: #FFFFFF; /* White for cards */
+            --border-color: #D9D1C7; /* Light cream border */
+            --accent-color: #8B6F47; /* Lighter brown */
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Arial', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .navbar {
+            background: var(--card-bg);
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar-brand {
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .navbar-brand:hover {
+            color:  #8B6F47;
+        }
+
+        .nav-link {
+            color:  #8B6F47;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: #8B6F47;
+        }
+
+        .navbar-icons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .navbar-icon {
+            color:  #8B6F47;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-icon:hover {
+            color:  #8B6F47;
+        }
+
+        .container {
+            max-width: 1100px;
+            padding: 2rem 1rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h1::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -0.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-header p {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 1rem auto;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: none;
+            border-radius: 0.5rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+            padding: 1.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeInUp 0.5s ease-in;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.4);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .card h3 {
+            color: var(--accent-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .card p {
+            color: var(--accent-color);
+            font-size: 0.95rem;
+        }
+
+        .team-member {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border: 3px solid var(--primary-color);
+        }
+
+        .team-member h4 {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .team-member p {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            background: var(--primary-light); /* Changed to lighter brown */
+            padding: 3rem 2rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .cta-section h2 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            color: var(--accent-color);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-cta {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            padding: 0.75rem 2rem;
+            border-radius: 0.25rem;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn-cta:hover {
+            background: #D9D1C7; /* Lighter border color for hover */
+            transform: translateY(-2px);
+        }
+
+        footer {
+            background: var(--card-bg);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+        }
+
+        .mode-switch {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                margin-bottom: 1.5rem;
+            }
+
+            .team-member img {
+                width: 120px;
+                height: 120px;
+            }
+
+            .cta-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Dark Mode Styles */
+        body.dark-mode {
+            --bg-color: #1a1a1a;
+            --card-bg: #2a2a2a;
+            --text-color: #e0e0e0;
+            --accent-color: #a0a0a0;
+        }
+
+        body.dark-mode .card {
+            background: var(--card-bg);
+        }
+
+        body.dark-mode .navbar {
+            background: var(--card-bg);
+        }
+
+        body.dark-mode .footer {
+            background: var(--card-bg);
+        }
+
+        body.dark-mode .btn-cta {
+            background: #a0a0a0;
+            color: var(--primary-color);
+        }
+
+        body.dark-mode .btn-cta:hover {
+            background: #808080;
+        }
+
+        body.dark-mode .section-header p,
+        body.dark-mode .card p,
+        body.dark-mode .team-member p,
+        body.dark-mode .footer {
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dark mode toggle -->
+    <div class="mode-switch" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.php">Artisana</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="collection.php">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="about.html">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="contact.html">Contact</a>
+                    </li>
+                </ul>
+                <div class="navbar-icons ms-3">
+                    <div class="navbar-icon"><i class="fas fa-search"></i></div>
+                    <div class="navbar-icon"><i class="fas fa-user"></i></div>
+                    <div class="navbar-icon"><i class="fas fa-shopping-cart"></i></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- About Us Section -->
+    <div class="container">
+        <div class="section-header">
+            <h1>About Us</h1>
+            <p>Discover the story behind Handmade Goods Marketplace, where creativity meets community.</p>
+        </div>
+
+        <!-- Mission -->
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <i class="fas fa-hand-holding-heart card-icon"></i>
+                    <h3>Our Mission</h3>
+                    <p>Empowering artisans worldwide by providing a platform to showcase their unique handmade creations and connect with passionate customers.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <i class="fas fa-users card-icon"></i>
+                    <h3>Our Community</h3>
+                    <p>Building a vibrant community of creators and buyers who value craftsmanship, sustainability, and the stories behind every product.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card text-center">
+                    <i class="fas fa-star card-icon"></i>
+                    <h3>Our Promise</h3>
+                    <p>Ensuring quality, authenticity, and a seamless experience for artisans, customers, and admins through innovation and dedication.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Team -->
+        <div class="section-header mt-5">
+            <h1>Meet Our Team</h1>
+            <p>A dedicated group passionate about bringing handmade artistry to the world.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Team Member">
+                    <h4>Anita Sharma</h4>
+                    <p>Founder & CEO</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Team Member">
+                    <h4>Ravi Patel</h4>
+                    <p>Lead Developer</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Team Member">
+                    <h4>Sneha Gupta</h4>
+                    <p>Community Manager</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="cta-section bg-light">
+            <h2>Join Our Creative Community</h2>
+            <p>Whether you're an artisan ready to share your craft or a customer seeking unique treasures, start your journey with us today.</p>
+            <a href="signup.php" class="btn-cta">Get Started</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Handmade Goods Marketplace. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Dark mode toggle
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        if (localStorage.getItem('darkMode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        toggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            const isDark = body.classList.contains('dark-mode');
+            localStorage.setItem('darkMode', isDark ? 'enabled' : 'disabled');
+            toggle.innerHTML = `<i class="fas fa-${isDark ? 'sun' : 'moon'}"></i>`;
+        });
+    </script>
+</body>
+</html>
